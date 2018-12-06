@@ -1,13 +1,22 @@
 <?php
 
 namespace App;
+
 use App\Application as Application;
 use App\SourceManager as SourceManager;
+
 class Scheduler
 {
     private $applications = [];
+    private $sourceManager;
 
-    public function __construct(){
+
+    /**
+     * @param SourceManager $sm
+     */
+    public function __construct($sm)
+    {
+        $this->sourceManager = $sm;
     }
 
     /**
@@ -15,7 +24,8 @@ class Scheduler
      * @param Application $application
      * @return $this
      */
-    public function addApplication(Application $application){
+    public function addApplication(Application $application)
+    {
         $this->applications[$application->getId()] = $application;
         return $this;
     }
@@ -27,8 +37,9 @@ class Scheduler
      * @param integer $start
      * @return Application[]
      */
-    public function load($count, $start = 1){
-        for($i = $start; $i<$count; $i++){
+    public function load($count, $start = 1)
+    {
+        for ($i = $start; $i < $count; $i++) {
             $application = $this->loadApplicationById($i);
             $this->applications[$i] = $application;
         }
@@ -36,7 +47,8 @@ class Scheduler
     }
 
 
-    public function save(){
+    public function save()
+    {
 
     }
 
@@ -45,10 +57,11 @@ class Scheduler
      * @param integer $id
      * @return Application
      */
-    public function loadApplicationById($id){
-        $sm = new SourceManager();
-        $allChecks = $sm->loadApplicationById($id);
-        $checks = ($allChecks)?explode(',',$allChecks ):[];
+    public function loadApplicationById($id)
+    {
+
+        $allChecks = $this->sourceManager->loadApplicationById($id);
+        $checks = ($allChecks) ? explode(',', $allChecks) : [];
         $app = new Application();
         $app->setId($id);
         $app->setChecks($checks);
@@ -60,10 +73,11 @@ class Scheduler
      * @param integer $time
      * @return integer[]
      */
-    public function getApplicationsByCheckTime($time){
+    public function getApplicationsByCheckTime($time)
+    {
         $result = [];
-        foreach($this->applications as $app){
-            if (in_array($time, $app->getChecks())){
+        foreach ($this->applications as $app) {
+            if (in_array($time, $app->getChecks())) {
                 $result[] = $app->getId();
             }
         }
@@ -76,8 +90,9 @@ class Scheduler
      * @param integer $id
      * @return Application
      */
-    public function getApplicationById($id){
-        return (array_key_exists($id,$this->applications))?$this->applications[$id]:false;
+    public function getApplicationById($id)
+    {
+        return (array_key_exists($id, $this->applications)) ? $this->applications[$id] : false;
 
     }
 
@@ -86,7 +101,8 @@ class Scheduler
      * @param integer $id
      * @return $this
      */
-    public function removeById($id){
+    public function removeById($id)
+    {
         unset($this->applications[$id]);
         $this->save();
         return $this;
