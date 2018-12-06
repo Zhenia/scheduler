@@ -44,7 +44,7 @@ if ($application){
 
 /**
  * Parse string to date UTC
- * @params string $time
+ * @param string $time
  * @return integer
  */
 function parseTime($time){

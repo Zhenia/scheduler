@@ -30,7 +30,7 @@ class Application{
 
     /**
      * Get next $count times of the check after current date
-     * @params integer $count
+     * @param integer $count
      * @return array
     */
     public function getNextChecks($count){

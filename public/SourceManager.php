@@ -12,7 +12,7 @@ class SourceManager
 
     /**
      * Load Application by curl
-     * @params integer $id
+     * @param integer $id
      * @return string
      */
     public function loadApplicationById($id){

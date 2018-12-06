@@ -12,7 +12,7 @@ class Scheduler
 
     /**
      * Add application to private property
-     * @params Application $application
+     * @param Application $application
      * @return $this
      */
     public function addApplication(Application $application){
@@ -23,8 +23,8 @@ class Scheduler
 
     /**
      * load $count applications started with $start
-     * @params integer $count
-     * @params integer $start
+     * @param integer $count
+     * @param integer $start
      * @return Application[]
      */
     public function load($count, $start = 1){
@@ -42,7 +42,7 @@ class Scheduler
 
     /**
      * load application by $id
-     * @params integer $id
+     * @param integer $id
      * @return Application
      */
     public function loadApplicationById($id){
@@ -57,7 +57,7 @@ class Scheduler
 
     /**
      * get applications with $check = $time
-     * @params integer $time
+     * @param integer $time
      * @return integer[]
      */
     public function getApplicationsByCheckTime($time){
@@ -73,7 +73,7 @@ class Scheduler
 
     /**
      * get application with $id
-     * @params integer $id
+     * @param integer $id
      * @return Application
      */
     public function getApplicationById($id){
@@ -83,7 +83,7 @@ class Scheduler
 
     /**
      * remove application with $id
-     * @params integer $id
+     * @param integer $id
      * @return $this
      */
     public function removeById($id){
